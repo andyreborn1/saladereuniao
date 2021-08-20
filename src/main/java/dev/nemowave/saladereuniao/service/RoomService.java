@@ -37,6 +37,10 @@ public class RoomService {
 
     public Room updateRoom(long id, Room room) throws Exception {
         verifyIfExists(id);
+        if(id!=room.getId()){
+            throw  new Exception("Inconsitencia de ID");
+        }
+
         Room updatedRoom = roomRepository.save(room);
         return updatedRoom;
     }

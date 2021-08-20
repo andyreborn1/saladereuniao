@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/v1/room")
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class RoomController {
@@ -29,7 +31,7 @@ public class RoomController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Room addRoom(@RequestBody Room room) {
+    public Room addRoom(@Valid @RequestBody Room room) {
         return roomService.addRoom(room);
     }
 
@@ -41,7 +43,7 @@ public class RoomController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Room updateRoom(@PathVariable("id") long id, @RequestBody Room room) throws Exception {
+    public Room updateRoom(@PathVariable("id") long id,@Valid @RequestBody Room room) throws Exception {
         return roomService.updateRoom(id, room);
     }
 }
