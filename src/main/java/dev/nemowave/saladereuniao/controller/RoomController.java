@@ -11,7 +11,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin()
 @RequestMapping("/api/v1/room")
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class RoomController {
