@@ -1,8 +1,6 @@
 package dev.nemowave.saladereuniao.service;
 
-import dev.nemowave.saladereuniao.DTO.RoomDTO;
 import dev.nemowave.saladereuniao.exception.ResourceNotFoundException;
-import dev.nemowave.saladereuniao.mapper.RoomMapper;
 import dev.nemowave.saladereuniao.model.Room;
 import dev.nemowave.saladereuniao.repository.RoomRepository;
 import lombok.AllArgsConstructor;
@@ -10,32 +8,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class RoomService {
     RoomRepository roomRepository;
 
-    private final RoomMapper roomMapper = RoomMapper.INSTANCE;
-
-    public List<RoomDTO> getRooms() {
+    public List<Room> getRooms() {
         List<Room> roomList = roomRepository.findAll();
 
-        return roomList.stream()
-                .map(roomMapper::toDTO)
-                .collect(Collectors.toList());
+        return roomList;
     }
 
-    public RoomDTO getRoom(long id) throws Exception {
+    public Room getRoom(long id) throws Exception {
         Room room = verifyIfExists(id);
-        return roomMapper.toDTO(room);
+        return room;
     }
 
-    public RoomDTO addRoom(RoomDTO room) {
-        Room roomToSave = roomMapper.toModel(room);
-        Room savedRoom = roomRepository.save(roomToSave);
-        return roomMapper.toDTO(savedRoom);
+    public Room addRoom(Room room) {
+        Room savedRoom = roomRepository.save(room);
+        return savedRoom;
     }
 
     public void deleteRoom(long id) throws Exception {
@@ -43,11 +35,10 @@ public class RoomService {
         roomRepository.deleteById(id);
     }
 
-    public RoomDTO updateRoom(long id,RoomDTO roomDTO) throws Exception {
+    public Room updateRoom(long id, Room room) throws Exception {
         verifyIfExists(id);
-        Room roomToUpdate = roomMapper.toModel(roomDTO);
-        Room updatedRoom = roomRepository.save(roomToUpdate);
-        return roomMapper.toDTO(updatedRoom);
+        Room updatedRoom = roomRepository.save(room);
+        return updatedRoom;
     }
 
     private Room verifyIfExists(Long id) throws Exception {

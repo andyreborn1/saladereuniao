@@ -1,6 +1,6 @@
 package dev.nemowave.saladereuniao.controller;
 
-import dev.nemowave.saladereuniao.DTO.RoomDTO;
+import dev.nemowave.saladereuniao.model.Room;
 import dev.nemowave.saladereuniao.service.RoomService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,19 +17,19 @@ public class RoomController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<RoomDTO> getRooms() {
+    public List<Room> getRooms() {
         return roomService.getRooms();
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public RoomDTO getRoom(@PathVariable("id") long id) throws Exception {
+    public Room getRoom(@PathVariable("id") long id) throws Exception {
         return roomService.getRoom(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public RoomDTO addRoom(@RequestBody RoomDTO room) {
+    public Room addRoom(@RequestBody Room room) {
         return roomService.addRoom(room);
     }
 
@@ -41,9 +41,7 @@ public class RoomController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public RoomDTO updateRoom(@PathVariable("id") long id, @RequestBody RoomDTO roomDTO) throws Exception {
-        return roomService.updateRoom(id, roomDTO);
+    public Room updateRoom(@PathVariable("id") long id, @RequestBody Room room) throws Exception {
+        return roomService.updateRoom(id, room);
     }
-
-
 }
