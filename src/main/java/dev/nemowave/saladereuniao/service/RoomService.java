@@ -1,6 +1,7 @@
 package dev.nemowave.saladereuniao.service;
 
 import dev.nemowave.saladereuniao.DTO.RoomDTO;
+import dev.nemowave.saladereuniao.exception.ResourceNotFoundException;
 import dev.nemowave.saladereuniao.mapper.RoomMapper;
 import dev.nemowave.saladereuniao.model.Room;
 import dev.nemowave.saladereuniao.repository.RoomRepository;
@@ -49,7 +50,7 @@ public class RoomService {
 
     private Room verifyIfExists(Long id) throws Exception {
         return roomRepository.findById(id)
-                .orElseThrow(Exception::new);
+                .orElseThrow(ResourceNotFoundException::new);
     }
 
 }
