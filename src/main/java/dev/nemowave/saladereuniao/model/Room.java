@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Entity
 @Data
@@ -27,8 +28,8 @@ public class Room {
     private LocalDate date;
 
     @Column(nullable = false)
-    private LocalDateTime startHour;
+    private LocalTime startHour;
 
     @Column(nullable = false)
-    private LocalDateTime endHour;
+    private LocalTime endHour;
 }
