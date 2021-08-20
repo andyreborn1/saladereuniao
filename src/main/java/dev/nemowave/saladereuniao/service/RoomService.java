@@ -32,9 +32,10 @@ public class RoomService {
         return roomMapper.toDTO(room);
     }
 
-    public Room addRoom(RoomDTO room) {
+    public RoomDTO addRoom(RoomDTO room) {
         Room roomToSave = roomMapper.toModel(room);
-        return roomRepository.save(roomToSave);
+        Room savedRoom = roomRepository.save(roomToSave);
+        return roomMapper.toDTO(savedRoom);
     }
 
     public void deleteRoom(long id) throws Exception {
@@ -42,10 +43,11 @@ public class RoomService {
         roomRepository.deleteById(id);
     }
 
-    public Room updateRoom(RoomDTO roomDTO) throws Exception {
-        verifyIfExists(roomDTO.getId());
+    public RoomDTO updateRoom(long id,RoomDTO roomDTO) throws Exception {
+        verifyIfExists(id);
         Room roomToUpdate = roomMapper.toModel(roomDTO);
-        return roomRepository.save(roomToUpdate);
+        Room updatedRoom = roomRepository.save(roomToUpdate);
+        return roomMapper.toDTO(updatedRoom);
     }
 
     private Room verifyIfExists(Long id) throws Exception {
